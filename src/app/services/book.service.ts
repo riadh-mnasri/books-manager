@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Book} from './book';
-import {Observable, Subject} from 'rxjs';
+import {Observable} from 'rxjs';
 
 const baseUrl = 'http://localhost:8080/api/books';
 
@@ -12,12 +12,18 @@ export class BookService {
   private books: Book[] = [{
     id: 0,
     title: 'Programming Kotlin',
-    description: 'Code in Kotlin'
+    description: 'Create Elegant, Expressive, and Performant JVM and Android Applications'
   },
     {
       id: 1,
       title: 'Effective Java',
       description: 'Best practises in Java'
+    }
+    ,
+    {
+      id: 2,
+      title: 'Test Driven Development: By Example',
+      description: 'Reference book in TDD'
     }
   ];
 
@@ -40,6 +46,7 @@ export class BookService {
 
   create(data) {
     // return this.http.post(baseUrl, data);
+    data.id = this.books.length;
     this.books.push(data);
     return new Observable(subscriber => subscriber.next(data));
   }
@@ -47,8 +54,9 @@ export class BookService {
   update(id, data) {
     // return this.http.put(`${baseUrl}/${id}`, data);
     const foundBook = this.books.find(book => book.id === id);
+    const index = this.books.indexOf(foundBook);
     const returnedTarget = Object.assign(foundBook, data);
-    this.books.push(returnedTarget);
+    this.books[index] = returnedTarget;
     return new Observable(subscriber => subscriber.next(returnedTarget));
   }
 
@@ -60,7 +68,7 @@ export class BookService {
 
   deleteAll() {
     // return this.http.delete(baseUrl);
-    this.books.splice(0, this.books.length - 1);
+    this.books.splice(0, this.books.length);
     return new Observable(subscriber => subscriber.next(this.books));
   }
 
@@ -70,8 +78,8 @@ export class BookService {
     if(title == 'undefined' || title == '') {
       return new Observable<Book[]>(subscriber => subscriber.next(this.books));
     }
-    const foundBook = this.books.find(book => book.title === title);
-    return new Observable<Book[]>(subscriber => subscriber.next(Array.of(foundBook)));
+    const foundBook = this.books.filter(book => book.title.toUpperCase().includes(title.toUpperCase()));
+    return new Observable<Book[]>(subscriber => subscriber.next(foundBook));
     // return Observable.of(foundBook);
   }
 }
