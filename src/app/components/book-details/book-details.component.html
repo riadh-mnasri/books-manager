@@ -2,6 +2,16 @@
   <h4>Book</h4>
   <form>
     <div class="form-group">
+      <label for="id">Identifiant</label>
+      <input
+        type="text"
+        class="form-control"
+        id="id"
+        [(ngModel)]="currentBook.id"
+        name="id"
+      />
+    </div>
+    <div class="form-group">
       <label for="title">Title</label>
       <input
         type="text"
@@ -22,26 +32,7 @@
       />
     </div>
 
-    <div class="form-group">
-      <label><strong>Status:</strong></label>
-      {{ currentBook.published ? "Published" : "Pending" }}
-    </div>
   </form>
-
-  <button
-    class="badge badge-primary mr-2"
-    *ngIf="currentBook.published"
-    (click)="updatePublished(false)"
-  >
-    UnPublish
-  </button>
-  <button
-    *ngIf="!currentBook.published"
-    class="badge badge-primary mr-2"
-    (click)="updatePublished(true)"
-  >
-    Publish
-  </button>
 
   <button class="badge badge-danger mr-2" (click)="deleteBook()">
     Delete
@@ -51,9 +42,4 @@
     Update
   </button>
   <p>{{ message }}</p>
-</div>
-
-<div *ngIf="!currentBook">
-  <br />
-  <p>Cannot access this Book...</p>
 </div>

@@ -33,24 +33,6 @@ export class BookDetailsComponent implements OnInit {
         });
   }
 
-  updatePublished(status) {
-    const data = {
-      title: this.currentBook.title,
-      description: this.currentBook.description,
-      published: status
-    };
-
-    this.bookService.update(this.currentBook.id, data)
-      .subscribe(
-        response => {
-          this.currentBook.published = status;
-          console.log(response);
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
   updateBook() {
     this.bookService.update(this.currentBook.id, this.currentBook)
       .subscribe(

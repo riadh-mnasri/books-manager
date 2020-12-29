@@ -9,8 +9,7 @@ import { BookService } from 'src/app/services/book.service';
 export class AddBookComponent implements OnInit {
   book = {
     title: '',
-    description: '',
-    published: false
+    description: ''
   };
   submitted = false;
 
@@ -40,8 +39,7 @@ export class AddBookComponent implements OnInit {
     this.submitted = false;
     this.book = {
       title: '',
-      description: '',
-      published: false
+      description: ''
     };
   }
 

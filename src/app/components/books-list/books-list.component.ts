@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from 'src/app/services/book.service';
+import {Book} from '../../services/book';
 
 @Component({
   selector: 'app-books-list',
@@ -8,7 +9,7 @@ import { BookService } from 'src/app/services/book.service';
 })
 export class BooksListComponent implements OnInit {
 
-  books: any;
+  books: Book[] = [];
   currentBook = null;
   currentIndex = -1;
   title = '';

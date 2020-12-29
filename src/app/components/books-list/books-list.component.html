@@ -45,19 +45,9 @@
         <label><strong>Description:</strong></label>
         {{ currentBook.description }}
       </div>
-      <div>
-        <label><strong>Status:</strong></label>
-        {{ currentBook.published ? "Published" : "Pending" }}
-      </div>
-
       <a class="badge badge-warning" routerLink="/books/{{ currentBook.id }}">
         Edit
       </a>
-    </div>
-
-    <div *ngIf="!currentBook">
-      <br />
-      <p>Please click on a Book...</p>
     </div>
   </div>
 </div>
